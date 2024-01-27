@@ -10,6 +10,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class is primarily for metadata elements which gets extended by other pojo class.
+ */
 @MappedSuperclass
 @Getter@Setter@ToString
 public class BaseEntity {

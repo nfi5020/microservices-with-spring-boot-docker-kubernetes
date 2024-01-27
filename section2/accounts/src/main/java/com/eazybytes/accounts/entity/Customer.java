@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * This class hold all the customer details
+ */
 @Entity
 @Getter@Setter@AllArgsConstructor@NoArgsConstructor
 public class Customer extends BaseEntity{
