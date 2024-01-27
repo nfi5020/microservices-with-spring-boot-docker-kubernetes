@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * This class hold all the account details.
+ */
 @Entity
 @Getter@Setter@AllArgsConstructor@NoArgsConstructor
 public class Accounts extends BaseEntity{

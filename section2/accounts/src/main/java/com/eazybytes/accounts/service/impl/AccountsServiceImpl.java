@@ -19,6 +19,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
+/**
+ * This Class implements IAccountsService interface functionality
+ */
 @Service
 @AllArgsConstructor
 public class AccountsServiceImpl implements IAccountsService {
@@ -26,10 +29,16 @@ public class AccountsServiceImpl implements IAccountsService {
     private AccountRepository accountRepository;
     private CustomerRepository customerRepository;
 
+    /**
+     * This method takes the CustomerDto and converts it to Customer. Then it check if any account exists with the customer phone number. If no account exists, it creates an account and calls the createNewBankAccount and saves the account info in the DB.
+     * @param customerDto
+     */
     @Override
     public void createAccount(CustomerDto customerDto) {
         Customer customer = CustomerMapper.mapToCustomer(customerDto, new Customer());
         Optional<Customer> customerByPhoneNumber = customerRepository.findByMobileNumber(customer.getMobileNumber());
+
+        // Checking if customer exists before creating
         if (customerByPhoneNumber.isPresent()){
             throw new CustomerAlreadyExistsException("Customer with mobile number: " + customer.getMobileNumber() + " already exists.");
         }
@@ -37,15 +46,24 @@ public class AccountsServiceImpl implements IAccountsService {
         customer.setCreatedAt(LocalDateTime.now());
         customer.setCreatedBy("Anonymous");
 
+        // Saving the Customer
         Customer savedCustomer = customerRepository.save(customer);
+
+        // Saving the Account
         accountRepository.save(createNewBankAccount(savedCustomer));
     }
 
+    /**
+     * This takes the customer object and maps the customer id to the account id by assigning customer id to account id during customer account creation.
+     * @param customer
+     * @return
+     */
     private Accounts createNewBankAccount(Customer customer){
         Accounts newAccount = new Accounts();
+
+        // Setting all the details for Account
         newAccount.setCustomerId(customer.getCustomerId());
         long randomAccNumber = 1000000000L + new Random().nextInt(900000000);
-
         newAccount.setAccountNumber(randomAccNumber);
         newAccount.setAccountType(AccountsConstants.SAVINGS);
         newAccount.setBranchAddress(AccountsConstants.ADDRESS);
@@ -55,6 +73,11 @@ public class AccountsServiceImpl implements IAccountsService {
         return newAccount;
     }
 
+    /**
+     * This takes the mobileNumber and searches the DB. If there is customer it takes the customer id from the customer object. Then it maps the Customer object to CustomerDto and Accounts object to AccountsDto object.
+     * @param mobileNumber
+     * @return
+     */
     @Override
     public CustomerDto fetchAccount(String mobileNumber) {
 

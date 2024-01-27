@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class helps with error response. Below mentioned details are what gets sent for failed API call.
+ */
 @Data@AllArgsConstructor
 public class ErrorResponseDto {
 

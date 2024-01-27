@@ -1,5 +1,8 @@
 package com.eazybytes.accounts.constants;
 
+/**
+ * This class hold all the constant value for different types of operation and the value for it.
+ */
 public final class AccountsConstants {
 
     private AccountsConstants() {
