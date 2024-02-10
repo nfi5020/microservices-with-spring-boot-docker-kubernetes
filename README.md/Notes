@@ -8,3 +8,5 @@ gradle clean build --x test
 mvn spring-boot:run
 
 java -jar <name of the jar>
+
+=============================================================================================

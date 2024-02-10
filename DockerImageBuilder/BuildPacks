@@ -1,0 +1,22 @@
+Steps to follow: 
+1. Add the configuration inside the pom.xml. Make sure to pass the image name details. 
+    	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>najrulbiplob/${project.artifactId}:s4</name>
+					</image>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+2. Run the maven command "mvn spring-boot:build-image" from the location where pom.xml is present to generate the docker images without the need of Dockerfile. 
+
+3. Execute the docker command "docker run -d -p 8090:8090 najrulbiplob/loans:s4". This will start the docker container based on the docker image name and port mapping provided. 
+
+
+FYI if build fail with status code 51 then update the DNS to manual and set it to 8.8.8.8 & 8.8.4.4
