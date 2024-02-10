@@ -1,0 +1,10 @@
+# Build the jar
+# Maven
+mvn clean build
+# Gradle
+gradle clean build --x test
+
+# Run the application
+mvn spring-boot:run
+
+java -jar <name of the jar>
