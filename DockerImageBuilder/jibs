@@ -1,0 +1,23 @@
+Steps to follow to build images using google jib: 
+1. Add the below configuration in the pom.xml file 
+
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>3.4.0</version>
+        <configuration>
+          <to>
+            <image>myimage</image>
+          </to>
+        </configuration>
+      </plugin>
+
+2. Run the maven command "mvn compile jib:dockerBuild" from the location where pom.xml is present to generate the dokcer image without the need of Dockerfile. 
+# One cool advantage of the google jib is it doesn't requrie docker to be installed in my system. 
+Build and push in the docker hub without docker present (mvn clean jib:build)
+- "mvn clean jib:build"
+
+Build to Docker daemon (mvn clean jib:dockerBuild)
+- "mvn clean jib:dockerBuild"
+
+3. Execute the docker command "docker run -d -p 9000:9000 najrulbiplob/cards:s4". This will pull the image if not present and expose our application in port 9000. 
