@@ -1,0 +1,106 @@
+DOCKER COMPOSE COMMANDS
+===================
+# Helps create container that is mentioned in the docker-compose file and stars them (-d means running in detached mode)
+docker-compose up -d
+
+# Helps with stopping and deleting the containers 
+docker-compsoe down
+
+# Stops the containers but does not delete them
+docker-compose stop
+
+# Starts the container if they exist. (If container does not exist it will fail since the container does not exist)
+docker-compsoe start 
+
+
+DOCKER IMPORTANT COMMANDS 
+===============================
+# To list all the docker images present in the Docker server
+docker images
+
+# To display detailed image information for a given image id
+docker image inspect [image-id]
+
+# To remove one or more image for a given image ids
+docker image rm [image-id]
+
+# To generate a docker image based on a Dockerfile
+docker build . -t [image-name]
+
+# To start a docker container based on a given image
+docker run -p [hostport]:[containerport] [image-name]
+
+# To show all running containers
+docker ps
+
+# To show all containers including running and stopped
+docker ps -accessed
+
+# To start one or more stopped containers
+docker container start [container-id]
+
+# To pause all processes within one or more containers
+docker container pause [container-id]
+
+# To resume/upause all processes within one or more containers
+docker container unpause [container-id]
+
+# To stop one or more running containers
+docker container stop [container-id]
+
+# To kill one or more running containers instantly
+docker container kill [container-id]
+
+# To restart one or more containers
+docker container restart [container-id]
+
+# To inspect all the details for a given container id
+docker container inspect [container-id]
+
+# To fetch the logs of a given container id
+docker container logs [container-id]
+
+# To follow log output of a given container
+docker container logs -f [container-id]
+
+# To remove one or more containers based on container ids
+docker rm [container-id]
+
+# To remove all stopped containers
+docker container prune
+
+# To push an image from a container registry
+docker image push [container_registry/username:tag]
+
+# To pull an image from a container registry
+docker image pull [container_registry/username:tag]
+
+# To remove all unused images
+docker image prune
+
+# To show all containers statistics like CPU, memory, I/O useage
+docker container starts
+
+# Remove stopped containers, dangling images, and unused networks, volumes, and cache
+docker system prune
+
+# To remove one or more images based on image ids
+docker rmi [image-id]
+
+# To login in to docker hub container registry
+docker login -u [username]
+
+# To logout from docker hub container registry
+docker logout
+
+# Displays the intermediate layers and commands that were executed when building the image
+docker history [image-name]
+
+# To open a shell inside a running container and execute commands 
+docker exec -it [container-id] sh
+
+# To create and start containers based on given docker compose file
+docker compose up
+
+# To stop and remove containers for services defined in the compose file
+docker compose down
