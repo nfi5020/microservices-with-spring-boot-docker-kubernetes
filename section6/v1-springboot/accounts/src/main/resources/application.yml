@@ -14,9 +14,17 @@ spring:
     hibernate:
       ddl-auto: update
       show-sql: true
+  # This will import the other yml files that are in resources. Profile active will help with which profile details should be used (VM: -D Ex. -Dspring.profiles.active=prod -Dbuild.version=1.3) (Program Argument: -- Ex. --spring.profiles.active=qa --build.version=2.1)
+  config:
+    import:
+      - "application_qa.yml"
+      - "application_prod.yml"
+  profiles:
+    active:
+      - "qa"
 
 build:
-  version: "1.0"
+  version: "3.0"
 
 accounts:
   message: "Welcome to EazyBank accounts related local APIs"
