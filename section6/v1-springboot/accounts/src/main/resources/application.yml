@@ -21,7 +21,9 @@ spring:
       - "application_prod.yml"
   profiles:
     active:
-      - "qa"
+      #- "qa"
+      #--spring.profiles.active=prod --build.version=3.333333
+      #-Dspring.profiles.active=qa -Dbuild.version=2.222222
 
 build:
   version: "3.0"
