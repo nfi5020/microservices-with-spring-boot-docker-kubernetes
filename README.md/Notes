@@ -10,3 +10,4 @@ mvn spring-boot:run
 java -jar <name of the jar>
 
 =============================================================================================
+Spring Config documents: https://docs.spring.io/spring-cloud-config/reference/server/environment-repository/git-backend.html

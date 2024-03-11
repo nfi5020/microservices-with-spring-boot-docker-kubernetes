@@ -2,12 +2,32 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+    # =====This value means the config files are either in the resources folder or in a local file system.====
+    #active: native
+    # =====This value will help with getting config files from github.com========
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: "classpath:/config"
+        # ======This is for reading config from local & resources folder. ==============
+        #native:
+          # This is for reading from the resources folder where the yml is located
+          #search-locations: "classpath:/config"
+
+          # This is for reading the config from directly local folder
+          #search-locations: "file:///C://config"
+
+        # ====This is for reading from the GitHub. (default-label helps with which branch to pull the files from)=====
+        git:
+          uri: "https://github.com/nfi5020/microservices-config.git"
+          # Which branch to get it from
+          default-label: main
+          # Maximum time it will wait before giving-up (5sec)
+          timeout: 5
+          # This will clone the GitHub repo at the start of the location.
+          clone-on-start: true
+          # If I made any changes in my local this will overwrite my local configs and reset it to what's in GitHub
+          force-pull: true
 
 server:
   port: 8071
