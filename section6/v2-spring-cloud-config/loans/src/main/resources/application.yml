@@ -20,3 +20,13 @@ spring:
     show-sql: true
   config:
     import: "optional:configserver:http://localhost:8071/"
+
+
+# Enables all the endpoints of the actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        # If you want to specify what to expose (ex. refresh) example is below. * will include everything actuator has to offer.
+        #include: "refresh"
+        include: "*"

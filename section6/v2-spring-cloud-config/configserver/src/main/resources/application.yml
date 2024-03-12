@@ -29,6 +29,10 @@ spring:
           # If I made any changes in my local this will overwrite my local configs and reset it to what's in GitHub
           force-pull: true
 
+# This will encrypt the details from the GitHub.
+encrypt:
+  key: "Fdmbva9lwqceQ1kLDzmjpRQfPojhCEVs"
+
 server:
   port: 8071
 
