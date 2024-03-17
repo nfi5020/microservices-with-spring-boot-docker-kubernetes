@@ -1,0 +1,10 @@
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq
+
+https://console.hookdeck.com/ 		->     Add Destination
+scoop bucket add hookdeck https://github.com/hookdeck/scoop-hookdeck-cli.git
+scoop install hookdeck
+hookdeck login --cli-key 573wses81kksqd5ocws8tknqwu3buqxznhywnu73ltpxkwpwbv
+hookdeck listen 8071 Source
+
+/monitor
+localhost
