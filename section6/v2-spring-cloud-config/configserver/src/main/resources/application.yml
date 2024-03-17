@@ -29,6 +29,24 @@ spring:
           # If I made any changes in my local this will overwrite my local configs and reset it to what's in GitHub
           force-pull: true
 
+  # This rabbit MQ helps with automatically invoking the refresh endpoint of the actuator of our microservices.
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+
+# Enables all the endpoints of the actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        # If you want to specify what to expose (ex. refresh) example is below. * will include everything actuator has to offer.
+        #include: "refresh"
+        include: "*"
+
+
 # This will encrypt the details from the GitHub.
 encrypt:
   key: "Fdmbva9lwqceQ1kLDzmjpRQfPojhCEVs"

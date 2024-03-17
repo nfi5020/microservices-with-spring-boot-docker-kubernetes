@@ -21,6 +21,13 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8071/"
 
+  # This rabbit MQ helps with automatically invoking the refresh endpoint of the actuator of our microservices.
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
 
 # Enables all the endpoints of the actuator
 management:

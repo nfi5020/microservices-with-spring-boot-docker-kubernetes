@@ -22,6 +22,13 @@ spring:
     #optional helps with running even if the api is not accessible
     import: "optional:configserver:http://localhost:8071/"
 
+  # This rabbit MQ helps with automatically invoking the refresh endpoint of the actuator of our microservices.
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
 
 # Enables all the endpoints of the actuator
 management:
@@ -31,3 +38,8 @@ management:
         # If you want to specify what to expose (ex. refresh) example is below. * will include everything actuator has to offer.
         #include: "refresh"
         include: "*"
+
+
+
+
+        #docker command for the rabbit MQ: docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
