@@ -46,6 +46,19 @@ management:
         #include: "refresh"
         include: "*"
 
+  # This health end points gets used by the docker compose file to determine if the config server is up before starting the account, loans, and cards microservices.
+  health:
+    # localhost:8071/actuator/health/readiness
+    readiness-state:
+      enabled: true
+    # localhost:8071/actuator/health/liveness
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
 
 # This will encrypt the details from the GitHub.
 encrypt:

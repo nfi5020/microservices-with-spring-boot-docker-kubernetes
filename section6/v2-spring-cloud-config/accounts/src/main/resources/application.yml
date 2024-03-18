@@ -19,7 +19,7 @@ spring:
       ddl-auto: update
       show-sql: true
   config:
-    #optional helps with running even if the api is not accessible
+    #optional helps with running even if the api is not accessible. after optional the configserver is a must regardless of what the name of the config server is.
     import: "optional:configserver:http://localhost:8071/"
 
   # This rabbit MQ helps with automatically invoking the refresh endpoint of the actuator of our microservices.
