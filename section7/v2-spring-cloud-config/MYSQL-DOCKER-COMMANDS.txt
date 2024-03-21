@@ -1,0 +1,9 @@
+
+# Creating database for the accounts microservices (user:root pass: root)
+docker run -p 3306:3306 --name accountsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=accountsdb -d mysql
+
+# Creating database for the accounts microservices (user:root pass: root)
+docker run -p 3307:3306 --name loansdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=loansdb -d mysql
+
+# Creating database for the accounts microservices (user:root pass: root)
+docker run -p 3308:3306 --name cardsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cardsdb -d mysql
