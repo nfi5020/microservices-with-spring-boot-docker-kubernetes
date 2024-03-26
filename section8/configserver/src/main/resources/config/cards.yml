@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+cards:
+  message: "Welcome to EazyBank cards related local APIs"
+  contactDetails:
+    name: "Najrul Islam - Developer"
+    email: "najrul.islam@eazybank.com"
+  onCallSupport:
+    - 2674684574
+    - 2110546587

@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+accounts:
+  message: "Welcome to EazyBank accounts related local APIs"
+  contactDetails:
+    name: "Najrul Islam - Developer"
+    email: "Najrul.islam@eazybank.com"
+  onCallSupport:
+    - 2158829865
+    - 2674564865

@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    # =====This value means the config files are either in the resources folder or in a local file system.====
+    #active: native
+    # =====This value will help with getting config files from github.com========
+    active: git
+  cloud:
+    config:
+      server:
+        # ======This is for reading config from local & resources folder. ==============
+        #native:
+          # This is for reading from the resources folder where the yml is located
+          #search-locations: "classpath:/config"
+
+          # This is for reading the config from directly local folder
+          #search-locations: "file:///C://config"
+
+        # ====This is for reading from the GitHub. (default-label helps with which branch to pull the files from)=====
+        git:
+          uri: "https://github.com/nfi5020/microservices-config.git"
+          # Which branch to get it from
+          default-label: main
+          # Maximum time it will wait before giving-up (5sec)
+          timeout: 5
+          # This will clone the GitHub repo at the start of the location.
+          clone-on-start: true
+          # If I made any changes in my local this will overwrite my local configs and reset it to what's in GitHub
+          force-pull: true
+
+# Enables all the endpoints of the actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        # If you want to specify what to expose (ex. refresh) example is below. * will include everything actuator has to offer.
+        #include: "refresh"
+        include: "*"
+
+  # This health end points gets used by the docker compose file to determine if the config server is up before starting the account, loans, and cards microservices.
+  health:
+    # localhost:8071/actuator/health/readiness
+    readiness-state:
+      enabled: true
+    # localhost:8071/actuator/health/liveness
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+
+# This will encrypt the details from the GitHub.
+encrypt:
+  key: "Fdmbva9lwqceQ1kLDzmjpRQfPojhCEVs"
+
+server:
+  port: 8071
+
+

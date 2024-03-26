@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to EazyBank accounts related local APIs"
+  contactDetails:
+    name: "Biplob Islam - Producer Owner"
+    email: "Biplob.islam@eazybank.com"
+  onCallSupport:
+    - 6548168844
+    - 4466245874
