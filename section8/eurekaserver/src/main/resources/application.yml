@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: "eurekaserver"
+  config:
+    #optional helps with running even if the api is not accessible. after optional the configserver is a must regardless of what the name of the config server is.
+    import: "optional:configserver:http://localhost:8071/"
+
+# Enables all the endpoints of the actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        # If you want to specify what to expose (ex. refresh) example is below. * will include everything actuator has to offer.
+        #include: "refresh"
+        include: "*"
+
+  # This health end points gets used by the docker compose file to determine if the config server is up before starting the account, loans, and cards microservices.
+  health:
+    # localhost:8071/actuator/health/readiness
+    readiness-state:
+      enabled: true
+    # localhost:8071/actuator/health/liveness
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true

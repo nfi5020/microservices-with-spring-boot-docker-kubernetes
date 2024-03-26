@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+cards:
+  message: "Welcome to EazyBank cards related local APIs"
+  contactDetails:
+    name: "Zack Islam - QA Lead"
+    email: "zack.islam@eazybank.com"
+  onCallSupport:
+    - 2154456787
+    - 2010546556
