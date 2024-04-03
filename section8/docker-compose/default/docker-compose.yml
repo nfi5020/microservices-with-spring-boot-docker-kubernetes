@@ -1,31 +1,9 @@
 services:
 
-  # Configuration for the rabbitmq
-  rabbit:
-    image: rabbitmq:3.12.0-management
-    hostname: rabbitmq
-    # Two ports because one port will take care of the management of the rabbitmq and the other port is for to take care of the core activities.
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    healthcheck:
-      # This is to test the rabbitmq health. Provided by the rabbitmq official doc
-      test: rabbitmq-diagnostics check_port_connectivity
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 5s
-    extends:
-      file: common-config.yml
-      service: network-deploy-service
-
   # Configuration for configserver
   configserver:
-    image: "najrulbiplob/configserver:s6"
+    image: "najrulbiplob/configserver:s8"
     container_name: configserver-ms
-    depends_on:
-      rabbit:
-        condition: service_healthy
     ports:
       - "8071:8071"
     # This healthcheck helps with testing if the configserver is ready with the configs or not.
@@ -40,10 +18,32 @@ services:
       file: common-config.yml
       service: microservice-base-config
 
+  # Configuration for configserver
+  eurekaserver:
+    image: "najrulbiplob/eurekaserver:s8"
+    container_name: eurekaserver-ms
+    ports:
+      - "8070:8070"
+    # This healthcheck helps with testing if the configserver is ready with the configs or not.
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      # Execute the healthcheck {start_period} after the 10 seconds. If there is failure retires of 10 times, interval of 10 seconds and timeout in 5 seconds.
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    depends_on:
+      configserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: eurekaserver
 
-# Configuration for accounts containers
+  # Configuration for accounts containers
   accounts:
-    image: "najrulbiplob/accounts:s6"
+    image: "najrulbiplob/accounts:s8"
     container_name: account-ms
     ports:
     - "8080:8080"
@@ -53,11 +53,11 @@ services:
     # This extends will help with reading repeating details from the common-config.yml file
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
 # Configuration for loans containers
   loans:
-    image: "najrulbiplob/loans:s6"
+    image: "najrulbiplob/loans:s8"
     container_name: loans-ms
     ports:
     - "8090:8090"
@@ -67,11 +67,25 @@ services:
     # This extends will help with reading repeating details from the common-config.yml file
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
+
+  # Configuration for loans containers
+  loans1:
+    image: "najrulbiplob/loans:s8"
+    container_name: loans-ms1
+    ports:
+      - "8091:8090"
+    # {healthcheck of configserver} Below configs helps with checking service status of the configserver
+    environment:
+      SPRING_APPLICATION_NAME: loans
+    # This extends will help with reading repeating details from the common-config.yml file
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
 
 # Configuration for cards containers
   cards:
-    image: "najrulbiplob/cards:s6"
+    image: "najrulbiplob/cards:s8"
     container_name: cards-ms
     ports:
     - "9000:9000"
@@ -81,7 +95,7 @@ services:
     # This extends will help with reading repeating details from the common-config.yml file
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
 
 # This helps with having all the microservices in the same network.
